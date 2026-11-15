@@ -33,9 +33,10 @@ them (same price guardrails).
   instead of -1.66, and adding observed controls makes it *worse* (-0.12): premium brands
   are both pricier and better-selling, so cross-product price differences masquerade as
   inelastic demand. Dairy even comes out with a positive elasticity.
-- **Fixed effects are not enough.** Two-way fixed effects remove brand and store effects but
-  not the category-specific demand peaks the pricing manager reacts to: -1.16 even when
-  every confounder is in the data.
+- **The standard two-way fixed-effects model is not enough.** Store x product and common week
+  effects remove brand and store effects but not the category-specific demand peaks the
+  pricing manager reacts to: -1.16 even when every confounder is in the data. Category x week
+  effects would absorb those peaks; that richer specification is not estimated here.
 - **Double ML recovers the truth when the confounders are observed** (-1.65, category
   RMSE 0.04-0.05), **but not when the manager also uses a demand signal the analyst
   cannot see** (-1.23). DML adjusts for what you observe, nothing more.
@@ -100,7 +101,7 @@ and week.
 The **Double ML** estimator (Chernozhukov et al. 2018) is written from scratch on top of
 scikit-learn learners: cross-fitted nuisances `E[log q | X]` and `E[log p | X]`, then the
 Neyman-orthogonal residual-on-residual estimate with a cluster-robust sandwich variance.
-Two design decisions mattered, both found in pilot runs:
+Two design decisions matter:
 
 1. **Remove the store x product effects first, then learn the rest.** Trees are poor at
    learning a thousand additive unit effects and a lasso shrinks them; either way the leftover
@@ -256,10 +257,6 @@ guardrail band is what keeps those flagged categories from an unbounded price in
 
 ### What did not work, or only partly
 
-- **DML on raw identifiers.** Pilot runs that gave the boosting learner store and product
-  ids as categorical features, instead of removing the store x product effects first, were
-  clearly biased in the categories with the strongest confounding; the lasso version shrank
-  the product dummies and was biased too. The within transformation fixed both.
 - **Cross-fitting by store x product unit.** Fold assignment at the unit level gave standard
   errors that were too small (Monte Carlo spread well above the reported SEs), because the
   other stores of the same product share its cost shocks across folds. Product-level folds
@@ -279,11 +276,16 @@ guardrail band is what keeps those flagged categories from an unbounded price in
 1. **Never price from a naive or flat regression on observational data.** Both were off by
    +1.3 to +1.6 and called four of five categories inelastic.
 2. **Treat two-way fixed effects as the floor, not the answer.** They remove brand and store
-   effects but stay biased (+0.5 here) whenever prices react to category-specific demand.
+   effects but stay biased (+0.5 here) whenever prices react to category-specific demand,
+   unless the model also has category x time effects.
 3. **If every demand signal the pricing team uses is in your data** (promo calendar, demand
    forecast inputs, events, weather), **use Double ML**: remove the unit fixed effects first,
    use flexible learners for the nuisances and cross-fit at the cluster level. It was the most
-   precise unbiased estimator here (category RMSE 0.04-0.05, 0.03-0.04% profit loss).
+   precise unbiased estimator here (category RMSE 0.04-0.05, 0.03-0.04% profit loss). Its
+   advantage over a well-specified fixed-effects model is not accuracy but that the boosting
+   version finds the category-specific structure by itself; the lasso version is given that
+   structure as features (category x season, holiday, event and temperature terms), so its
+   result is a best case.
 4. **If prices may also react to things you cannot see, you need an instrument.** A cost-side
    shifter (supplier cost changes, commodity or exchange-rate moves, tax changes) that moves
    price but not demand gave unbiased estimates in both scenarios. Check the first stage
