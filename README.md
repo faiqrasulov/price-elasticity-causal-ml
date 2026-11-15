@@ -27,7 +27,8 @@ every number is in [`reports/metrics.json`](reports/metrics.json) and is reprodu
 
 Means over the Monte Carlo runs. "Profit left on the table" is the true profit lost when all 50
 prices are set from the estimator's category elasticities, relative to an oracle that knows
-them (same price guardrails).
+them (same price guardrails). The guardrails bound the loss: 4.08% is what pricing every product
+at the +25% cap costs, and that is where OLS + controls ends up.
 
 - **Naive regression is badly wrong.** Pooled OLS of log units on log price gives -0.37
   instead of -1.66, and adding observed controls makes it *worse* (-0.12): premium brands
@@ -224,9 +225,9 @@ half-width.
 
 With every confounder observed, both DML variants land within 0.04 of all five true
 elasticities, with CIs of +-0.02 to +-0.04 (the boosting CI for Soft drinks, -2.17 +- 0.03,
-just misses -2.2, in line with the small Soft-drinks bias above). IV is centred correctly but
-its Snacks and Soft-drinks intervals are +-0.32 and +-0.49, too wide to price from on their
-own. With the hidden signal, DML and two-way FE are *confidently wrong*: they have the
+just misses -2.2, in line with the small Soft-drinks bias above). IV is close in every category
+(its Household interval, -2.65 +- 0.10, just misses -2.5), but its Snacks and Soft-drinks
+intervals are +-0.32 and +-0.49, too wide to price from on their own. With the hidden signal, DML and two-way FE are *confidently wrong*: they have the
 narrowest intervals in the table and none of them contains the truth (DML puts Dairy at -0.19
 against a true -0.6). Precision is not accuracy.
 
@@ -257,14 +258,9 @@ guardrail band is what keeps those flagged categories from an unbounded price in
 
 ### What did not work, or only partly
 
-- **Cross-fitting by store x product unit.** Fold assignment at the unit level gave standard
-  errors that were too small (Monte Carlo spread well above the reported SEs), because the
-  other stores of the same product share its cost shocks across folds. Product-level folds
-  fixed it.
-- **A small residual bias in boosting-DML.** Even after moving to 100 trees with 31 leaves, the
-  Soft-drinks estimate keeps a +0.03 bias (85% coverage). More trees reduce it further but
-  cost run time; the lasso, whose basis includes category-specific temperature splines,
-  does slightly better there.
+- **A small residual bias in boosting-DML.** With 100 trees of 31 leaves, the Soft-drinks
+  estimate keeps a +0.03 bias (85% coverage); the lasso, whose basis includes category-specific
+  temperature splines, does slightly better there.
 - **IV is not precise enough per category.** With only the cost shock as variation and
   seasonal noise left in the residual, the Soft-drinks CI is +-0.49 on 156,000 rows.
   Richer controls (or DML-IV, below) would tighten it.
@@ -307,6 +303,11 @@ make run              # main analysis + Monte Carlo -> reports/metrics.json + fi
 make test             # 30 tests, ~10 s
 make data             # optional: write the simulated panel to data/simulated_panel.csv.gz
 ```
+
+`make install` takes the newest compatible packages. To reproduce the committed `reports/`, use
+`make install-locked` instead: it installs the versions pinned in
+[`requirements.lock`](requirements.lock) (Python 3.12). With them `make run` regenerates every value in
+`reports/metrics.json` exactly, apart from the recorded run times (checked on macOS arm64).
 
 ```python
 from elasticity import SimConfig, make_design, simulate_panel, ESTIMATORS

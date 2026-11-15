@@ -1,10 +1,15 @@
 PYTHON ?= python
 MEMCAP ?=
 
-.PHONY: install data run test lint clean
+.PHONY: install install-locked data run test lint clean
 
 install:
 	$(PYTHON) -m pip install -e ".[dev]"
+
+# Exact package versions that produced the committed reports/ (see requirements.lock).
+install-locked:
+	$(PYTHON) -m pip install -r requirements.lock
+	$(PYTHON) -m pip install -e . --no-deps
 
 # Write the simulated main panel to data/ for inspection (no external data is used).
 data:
