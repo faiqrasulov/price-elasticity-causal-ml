@@ -15,4 +15,3 @@ htmlcov/
 *.joblib
 *.pt
 .DS_Store
-scratch/

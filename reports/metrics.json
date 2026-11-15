@@ -1,0 +1,1713 @@
+{
+  "settings": {
+    "main_panel": {
+      "stores": 20,
+      "products": 50,
+      "weeks": 156
+    },
+    "monte_carlo_panel": {
+      "stores": 4,
+      "products": 50,
+      "weeks": 104,
+      "replications_per_scenario": 150
+    },
+    "scenarios": {
+      "observed": {
+        "hidden_confounding": 0.0
+      },
+      "hidden": {
+        "hidden_confounding": 1.0
+      }
+    },
+    "seeds": {
+      "design": 7,
+      "main": 2026,
+      "monte_carlo": 10000
+    },
+    "simulation": {
+      "n_stores": 20,
+      "products_per_category": 10,
+      "n_weeks": 156,
+      "hidden_confounding": 0.0,
+      "price_response": 0.3,
+      "brand_volume": 0.25,
+      "brand_price": 0.7,
+      "volume_sd": 0.3,
+      "price_dispersion": 0.15,
+      "elasticity_sd": 0.0,
+      "cost_passthrough": 0.8,
+      "cost_sd": 0.06,
+      "cost_ar": 0.7,
+      "price_noise_sd": 0.08,
+      "demand_noise_sd": 0.2,
+      "shock_sd": 0.12,
+      "shock_ar": 0.6,
+      "promo_rate": 0.1,
+      "promo_depth": 0.2,
+      "display_rate": 0.6,
+      "feature_rate": 0.5,
+      "display_lift": 0.25,
+      "feature_lift": 0.15,
+      "event_rate": 0.03,
+      "store_traffic_sd": 0.3,
+      "temp_noise_sd": 2.5
+    },
+    "dml": {
+      "n_folds": 5,
+      "hgb_max_iter": 100,
+      "hgb_learning_rate": 0.2,
+      "hgb_max_leaf_nodes": 31,
+      "hgb_max_bins": 63,
+      "seed": 0
+    },
+    "price_band": {
+      "lower": 0.8,
+      "upper": 1.25
+    }
+  },
+  "truth": {
+    "average_elasticity": -1.66,
+    "by_category": {
+      "Dairy": -0.6,
+      "Bakery": -1.2,
+      "Snacks": -1.8,
+      "Soft drinks": -2.2,
+      "Household": -2.5
+    }
+  },
+  "status_quo_profit_share_of_oracle": 0.8953,
+  "status_quo_profit_left_by_category": {
+    "Dairy": 0.4512,
+    "Bakery": 0.2761,
+    "Snacks": 0.0028,
+    "Soft drinks": 0.0165,
+    "Household": 0.0042
+  },
+  "oracle_price_change_by_category": {
+    "Dairy": 1.25,
+    "Bakery": 1.25,
+    "Snacks": 0.9375,
+    "Soft drinks": 1.1111,
+    "Household": 0.9524
+  },
+  "main": {
+    "observed": {
+      "n_rows": 156000,
+      "estimators": {
+        "naive_ols": {
+          "label": "Naive OLS",
+          "average_elasticity": -0.3555,
+          "average_se": 0.135,
+          "by_category": {
+            "Dairy": {
+              "estimate": 0.612,
+              "se": 0.2951,
+              "ci95": [
+                0.0337,
+                1.1904
+              ]
+            },
+            "Bakery": {
+              "estimate": -0.6598,
+              "se": 0.4054,
+              "ci95": [
+                -1.4543,
+                0.1347
+              ]
+            },
+            "Snacks": {
+              "estimate": -0.245,
+              "se": 0.3589,
+              "ci95": [
+                -0.9484,
+                0.4584
+              ]
+            },
+            "Soft drinks": {
+              "estimate": -0.7976,
+              "se": 0.3054,
+              "ci95": [
+                -1.3962,
+                -0.199
+              ]
+            },
+            "Household": {
+              "estimate": -1.8591,
+              "se": 0.4768,
+              "ci95": [
+                -2.7937,
+                -0.9245
+              ]
+            }
+          },
+          "profit_share_of_oracle": 0.9608,
+          "profit_left_on_table": 0.0392,
+          "profit_left_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.0911
+          },
+          "categories_without_interior_optimum": 4,
+          "price_change_by_category": {
+            "Dairy": 1.25,
+            "Bakery": 1.25,
+            "Snacks": 1.25,
+            "Soft drinks": 1.25,
+            "Household": 1.2366
+          },
+          "diagnostics": {}
+        },
+        "ols_controls": {
+          "label": "OLS + controls",
+          "average_elasticity": -0.1164,
+          "average_se": 0.2205,
+          "by_category": {
+            "Dairy": {
+              "estimate": 0.8496,
+              "se": 0.2946,
+              "ci95": [
+                0.2722,
+                1.4269
+              ]
+            },
+            "Bakery": {
+              "estimate": -0.2498,
+              "se": 0.44,
+              "ci95": [
+                -1.1123,
+                0.6127
+              ]
+            },
+            "Snacks": {
+              "estimate": -0.1277,
+              "se": 0.3657,
+              "ci95": [
+                -0.8445,
+                0.5891
+              ]
+            },
+            "Soft drinks": {
+              "estimate": -0.4361,
+              "se": 0.2945,
+              "ci95": [
+                -1.0133,
+                0.141
+              ]
+            },
+            "Household": {
+              "estimate": -1.4015,
+              "se": 0.4721,
+              "ci95": [
+                -2.3267,
+                -0.4762
+              ]
+            }
+          },
+          "profit_share_of_oracle": 0.9592,
+          "profit_left_on_table": 0.0408,
+          "profit_left_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.0974
+          },
+          "categories_without_interior_optimum": 4,
+          "price_change_by_category": {
+            "Dairy": 1.25,
+            "Bakery": 1.25,
+            "Snacks": 1.25,
+            "Soft drinks": 1.25,
+            "Household": 1.25
+          },
+          "diagnostics": {}
+        },
+        "twfe": {
+          "label": "Two-way FE",
+          "average_elasticity": -1.1429,
+          "average_se": 0.0783,
+          "by_category": {
+            "Dairy": {
+              "estimate": -0.4617,
+              "se": 0.0361,
+              "ci95": [
+                -0.5325,
+                -0.391
+              ]
+            },
+            "Bakery": {
+              "estimate": -0.9254,
+              "se": 0.0464,
+              "ci95": [
+                -1.0163,
+                -0.8346
+              ]
+            },
+            "Snacks": {
+              "estimate": -0.8821,
+              "se": 0.0636,
+              "ci95": [
+                -1.0068,
+                -0.7574
+              ]
+            },
+            "Soft drinks": {
+              "estimate": -1.1815,
+              "se": 0.0521,
+              "ci95": [
+                -1.2837,
+                -1.0794
+              ]
+            },
+            "Household": {
+              "estimate": -2.3817,
+              "se": 0.0331,
+              "ci95": [
+                -2.4465,
+                -2.3169
+              ]
+            }
+          },
+          "profit_share_of_oracle": 0.9826,
+          "profit_left_on_table": 0.0174,
+          "profit_left_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.002
+          },
+          "categories_without_interior_optimum": 3,
+          "price_change_by_category": {
+            "Dairy": 1.25,
+            "Bakery": 1.25,
+            "Snacks": 1.25,
+            "Soft drinks": 1.25,
+            "Household": 0.985
+          },
+          "diagnostics": {}
+        },
+        "iv_2sls": {
+          "label": "2SLS (cost IV)",
+          "average_elasticity": -1.5712,
+          "average_se": 0.1161,
+          "by_category": {
+            "Dairy": {
+              "estimate": -0.5975,
+              "se": 0.0267,
+              "ci95": [
+                -0.6499,
+                -0.5452
+              ]
+            },
+            "Bakery": {
+              "estimate": -1.2155,
+              "se": 0.0826,
+              "ci95": [
+                -1.3775,
+                -1.0535
+              ]
+            },
+            "Snacks": {
+              "estimate": -1.6749,
+              "se": 0.1643,
+              "ci95": [
+                -1.9968,
+                -1.3529
+              ]
+            },
+            "Soft drinks": {
+              "estimate": -1.7313,
+              "se": 0.2524,
+              "ci95": [
+                -2.226,
+                -1.2366
+              ]
+            },
+            "Household": {
+              "estimate": -2.6488,
+              "se": 0.0511,
+              "ci95": [
+                -2.7489,
+                -2.5486
+              ]
+            }
+          },
+          "profit_share_of_oracle": 0.9946,
+          "profit_left_on_table": 0.0054,
+          "profit_left_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0064,
+            "Soft drinks": 0.016,
+            "Household": 0.0027
+          },
+          "categories_without_interior_optimum": 1,
+          "price_change_by_category": {
+            "Dairy": 1.25,
+            "Bakery": 1.25,
+            "Snacks": 1.0341,
+            "Soft drinks": 1.25,
+            "Household": 0.918
+          },
+          "diagnostics": {
+            "first_stage_f": 2173.681094,
+            "min_category_first_stage_f": 41.354315
+          }
+        },
+        "dml_lasso": {
+          "label": "DML (lasso)",
+          "average_elasticity": -1.6568,
+          "average_se": 0.1004,
+          "by_category": {
+            "Dairy": {
+              "estimate": -0.5934,
+              "se": 0.0169,
+              "ci95": [
+                -0.6266,
+                -0.5602
+              ]
+            },
+            "Bakery": {
+              "estimate": -1.1939,
+              "se": 0.0128,
+              "ci95": [
+                -1.219,
+                -1.1688
+              ]
+            },
+            "Snacks": {
+              "estimate": -1.7758,
+              "se": 0.0105,
+              "ci95": [
+                -1.7963,
+                -1.7553
+              ]
+            },
+            "Soft drinks": {
+              "estimate": -2.207,
+              "se": 0.0173,
+              "ci95": [
+                -2.2408,
+                -2.1731
+              ]
+            },
+            "Household": {
+              "estimate": -2.5064,
+              "se": 0.0186,
+              "ci95": [
+                -2.5428,
+                -2.47
+              ]
+            }
+          },
+          "profit_share_of_oracle": 0.9999,
+          "profit_left_on_table": 0.0001,
+          "profit_left_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0002,
+            "Soft drinks": 0.0,
+            "Household": 0.0
+          },
+          "categories_without_interior_optimum": 1,
+          "price_change_by_category": {
+            "Dairy": 1.25,
+            "Bakery": 1.25,
+            "Snacks": 0.9538,
+            "Soft drinks": 1.1082,
+            "Household": 0.9508
+          },
+          "diagnostics": {
+            "r2_outcome": 0.29895,
+            "r2_price": 0.425554,
+            "alpha_outcome": 0.000782,
+            "alpha_price": 0.000395
+          }
+        },
+        "dml_boosting": {
+          "label": "DML (boosting)",
+          "average_elasticity": -1.6513,
+          "average_se": 0.0991,
+          "by_category": {
+            "Dairy": {
+              "estimate": -0.5931,
+              "se": 0.0126,
+              "ci95": [
+                -0.6178,
+                -0.5684
+              ]
+            },
+            "Bakery": {
+              "estimate": -1.2003,
+              "se": 0.0146,
+              "ci95": [
+                -1.2289,
+                -1.1717
+              ]
+            },
+            "Snacks": {
+              "estimate": -1.7647,
+              "se": 0.0094,
+              "ci95": [
+                -1.7832,
+                -1.7462
+              ]
+            },
+            "Soft drinks": {
+              "estimate": -2.1745,
+              "se": 0.013,
+              "ci95": [
+                -2.1999,
+                -2.1491
+              ]
+            },
+            "Household": {
+              "estimate": -2.5096,
+              "se": 0.0175,
+              "ci95": [
+                -2.544,
+                -2.4752
+              ]
+            }
+          },
+          "profit_share_of_oracle": 0.9998,
+          "profit_left_on_table": 0.0002,
+          "profit_left_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0005,
+            "Soft drinks": 0.0001,
+            "Household": 0.0
+          },
+          "categories_without_interior_optimum": 1,
+          "price_change_by_category": {
+            "Dairy": 1.25,
+            "Bakery": 1.25,
+            "Snacks": 0.9616,
+            "Soft drinks": 1.1221,
+            "Household": 0.95
+          },
+          "diagnostics": {
+            "r2_outcome": 0.304247,
+            "r2_price": 0.414311
+          }
+        }
+      }
+    },
+    "hidden": {
+      "n_rows": 156000,
+      "estimators": {
+        "naive_ols": {
+          "label": "Naive OLS",
+          "average_elasticity": -0.3386,
+          "average_se": 0.1337,
+          "by_category": {
+            "Dairy": {
+              "estimate": 0.6804,
+              "se": 0.2839,
+              "ci95": [
+                0.1239,
+                1.2369
+              ]
+            },
+            "Bakery": {
+              "estimate": -0.4899,
+              "se": 0.3832,
+              "ci95": [
+                -1.2409,
+                0.2611
+              ]
+            },
+            "Snacks": {
+              "estimate": -0.1957,
+              "se": 0.3427,
+              "ci95": [
+                -0.8674,
+                0.476
+              ]
+            },
+            "Soft drinks": {
+              "estimate": -0.711,
+              "se": 0.2865,
+              "ci95": [
+                -1.2726,
+                -0.1494
+              ]
+            },
+            "Household": {
+              "estimate": -1.6976,
+              "se": 0.4381,
+              "ci95": [
+                -2.5563,
+                -0.8389
+              ]
+            }
+          },
+          "profit_share_of_oracle": 0.9592,
+          "profit_left_on_table": 0.0408,
+          "profit_left_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.0974
+          },
+          "categories_without_interior_optimum": 4,
+          "price_change_by_category": {
+            "Dairy": 1.25,
+            "Bakery": 1.25,
+            "Snacks": 1.25,
+            "Soft drinks": 1.25,
+            "Household": 1.25
+          },
+          "diagnostics": {}
+        },
+        "ols_controls": {
+          "label": "OLS + controls",
+          "average_elasticity": -0.025,
+          "average_se": 0.2068,
+          "by_category": {
+            "Dairy": {
+              "estimate": 0.9274,
+              "se": 0.2859,
+              "ci95": [
+                0.3669,
+                1.4878
+              ]
+            },
+            "Bakery": {
+              "estimate": -0.0762,
+              "se": 0.416,
+              "ci95": [
+                -0.8916,
+                0.7391
+              ]
+            },
+            "Snacks": {
+              "estimate": -0.0704,
+              "se": 0.349,
+              "ci95": [
+                -0.7545,
+                0.6137
+              ]
+            },
+            "Soft drinks": {
+              "estimate": -0.3411,
+              "se": 0.2741,
+              "ci95": [
+                -0.8784,
+                0.1962
+              ]
+            },
+            "Household": {
+              "estimate": -1.2358,
+              "se": 0.4366,
+              "ci95": [
+                -2.0914,
+                -0.3801
+              ]
+            }
+          },
+          "profit_share_of_oracle": 0.9592,
+          "profit_left_on_table": 0.0408,
+          "profit_left_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.0974
+          },
+          "categories_without_interior_optimum": 4,
+          "price_change_by_category": {
+            "Dairy": 1.25,
+            "Bakery": 1.25,
+            "Snacks": 1.25,
+            "Soft drinks": 1.25,
+            "Household": 1.25
+          },
+          "diagnostics": {}
+        },
+        "twfe": {
+          "label": "Two-way FE",
+          "average_elasticity": -0.84,
+          "average_se": 0.0749,
+          "by_category": {
+            "Dairy": {
+              "estimate": -0.0857,
+              "se": 0.0277,
+              "ci95": [
+                -0.14,
+                -0.0314
+              ]
+            },
+            "Bakery": {
+              "estimate": -0.5689,
+              "se": 0.0367,
+              "ci95": [
+                -0.6408,
+                -0.4969
+              ]
+            },
+            "Snacks": {
+              "estimate": -0.6374,
+              "se": 0.052,
+              "ci95": [
+                -0.7394,
+                -0.5354
+              ]
+            },
+            "Soft drinks": {
+              "estimate": -0.9642,
+              "se": 0.0452,
+              "ci95": [
+                -1.0529,
+                -0.8755
+              ]
+            },
+            "Household": {
+              "estimate": -1.9971,
+              "se": 0.0244,
+              "ci95": [
+                -2.0448,
+                -1.9493
+              ]
+            }
+          },
+          "profit_share_of_oracle": 0.9709,
+          "profit_left_on_table": 0.0291,
+          "profit_left_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.0498
+          },
+          "categories_without_interior_optimum": 4,
+          "price_change_by_category": {
+            "Dairy": 1.25,
+            "Bakery": 1.25,
+            "Snacks": 1.25,
+            "Soft drinks": 1.25,
+            "Household": 1.1445
+          },
+          "diagnostics": {}
+        },
+        "iv_2sls": {
+          "label": "2SLS (cost IV)",
+          "average_elasticity": -1.5708,
+          "average_se": 0.1157,
+          "by_category": {
+            "Dairy": {
+              "estimate": -0.5976,
+              "se": 0.0269,
+              "ci95": [
+                -0.6502,
+                -0.545
+              ]
+            },
+            "Bakery": {
+              "estimate": -1.2156,
+              "se": 0.0828,
+              "ci95": [
+                -1.3779,
+                -1.0533
+              ]
+            },
+            "Snacks": {
+              "estimate": -1.6757,
+              "se": 0.1633,
+              "ci95": [
+                -1.9956,
+                -1.3557
+              ]
+            },
+            "Soft drinks": {
+              "estimate": -1.7359,
+              "se": 0.2502,
+              "ci95": [
+                -2.2264,
+                -1.2454
+              ]
+            },
+            "Household": {
+              "estimate": -2.6509,
+              "se": 0.0518,
+              "ci95": [
+                -2.7524,
+                -2.5494
+              ]
+            }
+          },
+          "profit_share_of_oracle": 0.9946,
+          "profit_left_on_table": 0.0054,
+          "profit_left_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0063,
+            "Soft drinks": 0.016,
+            "Household": 0.0027
+          },
+          "categories_without_interior_optimum": 1,
+          "price_change_by_category": {
+            "Dairy": 1.25,
+            "Bakery": 1.25,
+            "Snacks": 1.0334,
+            "Soft drinks": 1.25,
+            "Household": 0.9176
+          },
+          "diagnostics": {
+            "first_stage_f": 2090.857592,
+            "min_category_first_stage_f": 39.418499
+          }
+        },
+        "dml_lasso": {
+          "label": "DML (lasso)",
+          "average_elasticity": -1.235,
+          "average_se": 0.0998,
+          "by_category": {
+            "Dairy": {
+              "estimate": -0.1827,
+              "se": 0.013,
+              "ci95": [
+                -0.2081,
+                -0.1573
+              ]
+            },
+            "Bakery": {
+              "estimate": -0.7675,
+              "se": 0.0121,
+              "ci95": [
+                -0.7912,
+                -0.7438
+              ]
+            },
+            "Snacks": {
+              "estimate": -1.3497,
+              "se": 0.0072,
+              "ci95": [
+                -1.3638,
+                -1.3356
+              ]
+            },
+            "Soft drinks": {
+              "estimate": -1.7884,
+              "se": 0.0128,
+              "ci95": [
+                -1.8135,
+                -1.7633
+              ]
+            },
+            "Household": {
+              "estimate": -2.0909,
+              "se": 0.0163,
+              "ci95": [
+                -2.1229,
+                -2.0589
+              ]
+            }
+          },
+          "profit_share_of_oracle": 0.9757,
+          "profit_left_on_table": 0.0243,
+          "profit_left_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.0305
+          },
+          "categories_without_interior_optimum": 2,
+          "price_change_by_category": {
+            "Dairy": 1.25,
+            "Bakery": 1.25,
+            "Snacks": 1.25,
+            "Soft drinks": 1.25,
+            "Household": 1.0952
+          },
+          "diagnostics": {
+            "r2_outcome": 0.326135,
+            "r2_price": 0.391673,
+            "alpha_outcome": 0.000978,
+            "alpha_price": 0.000381
+          }
+        },
+        "dml_boosting": {
+          "label": "DML (boosting)",
+          "average_elasticity": -1.2349,
+          "average_se": 0.0985,
+          "by_category": {
+            "Dairy": {
+              "estimate": -0.1886,
+              "se": 0.0112,
+              "ci95": [
+                -0.2105,
+                -0.1667
+              ]
+            },
+            "Bakery": {
+              "estimate": -0.7734,
+              "se": 0.0108,
+              "ci95": [
+                -0.7946,
+                -0.7522
+              ]
+            },
+            "Snacks": {
+              "estimate": -1.3467,
+              "se": 0.0092,
+              "ci95": [
+                -1.3647,
+                -1.3288
+              ]
+            },
+            "Soft drinks": {
+              "estimate": -1.7689,
+              "se": 0.01,
+              "ci95": [
+                -1.7885,
+                -1.7494
+              ]
+            },
+            "Household": {
+              "estimate": -2.092,
+              "se": 0.0136,
+              "ci95": [
+                -2.1186,
+                -2.0653
+              ]
+            }
+          },
+          "profit_share_of_oracle": 0.9757,
+          "profit_left_on_table": 0.0243,
+          "profit_left_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.0303
+          },
+          "categories_without_interior_optimum": 2,
+          "price_change_by_category": {
+            "Dairy": 1.25,
+            "Bakery": 1.25,
+            "Snacks": 1.25,
+            "Soft drinks": 1.25,
+            "Household": 1.0947
+          },
+          "diagnostics": {
+            "r2_outcome": 0.33268,
+            "r2_price": 0.38006
+          }
+        }
+      }
+    }
+  },
+  "monte_carlo": {
+    "observed": {
+      "naive_ols": {
+        "label": "Naive OLS",
+        "average_elasticity": {
+          "mean": -0.3686,
+          "bias": 1.2914,
+          "sd": 0.0119,
+          "rmse": 1.2914,
+          "ci95_coverage": 0.0
+        },
+        "category": {
+          "mean_abs_bias": 1.05,
+          "rmse": 1.1237,
+          "ci95_coverage": 0.4,
+          "ci95_coverage_t_critical": 0.4,
+          "by_category": {
+            "Dairy": {
+              "mean": 0.5312,
+              "bias": 1.1312,
+              "rmse": 1.1325,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.3015
+            },
+            "Bakery": {
+              "mean": -0.643,
+              "bias": 0.557,
+              "rmse": 0.5621,
+              "ci95_coverage": 1.0,
+              "mean_se": 0.4171
+            },
+            "Snacks": {
+              "mean": -0.2517,
+              "bias": 1.5483,
+              "rmse": 1.5491,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.3692
+            },
+            "Soft drinks": {
+              "mean": -0.8207,
+              "bias": 1.3793,
+              "rmse": 1.3809,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.3045
+            },
+            "Household": {
+              "mean": -1.8655,
+              "bias": 0.6345,
+              "rmse": 0.6391,
+              "ci95_coverage": 1.0,
+              "mean_se": 0.4732
+            }
+          }
+        },
+        "profit_left_on_table": {
+          "mean": 0.0371,
+          "median": 0.0385,
+          "p90": 0.0408,
+          "mean_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.0825
+          }
+        },
+        "flagged_categories_per_estimate": 4.0
+      },
+      "ols_controls": {
+        "label": "OLS + controls",
+        "average_elasticity": {
+          "mean": -0.122,
+          "bias": 1.538,
+          "sd": 0.028,
+          "rmse": 1.5382,
+          "ci95_coverage": 0.0
+        },
+        "category": {
+          "mean_abs_bias": 1.4048,
+          "rmse": 1.4394,
+          "ci95_coverage": 0.028,
+          "ci95_coverage_t_critical": 0.1707,
+          "by_category": {
+            "Dairy": {
+              "mean": 0.8323,
+              "bias": 1.4323,
+              "rmse": 1.4331,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.2992
+            },
+            "Bakery": {
+              "mean": -0.223,
+              "bias": 0.977,
+              "rmse": 0.9799,
+              "ci95_coverage": 0.14,
+              "mean_se": 0.4499
+            },
+            "Snacks": {
+              "mean": -0.1071,
+              "bias": 1.6929,
+              "rmse": 1.6933,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.3724
+            },
+            "Soft drinks": {
+              "mean": -0.4227,
+              "bias": 1.7773,
+              "rmse": 1.7783,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.2937
+            },
+            "Household": {
+              "mean": -1.3555,
+              "bias": 1.1445,
+              "rmse": 1.147,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.4648
+            }
+          }
+        },
+        "profit_left_on_table": {
+          "mean": 0.0408,
+          "median": 0.0408,
+          "p90": 0.0408,
+          "mean_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.0974
+          }
+        },
+        "flagged_categories_per_estimate": 4.0
+      },
+      "twfe": {
+        "label": "Two-way FE",
+        "average_elasticity": {
+          "mean": -1.1577,
+          "bias": 0.5023,
+          "sd": 0.0247,
+          "rmse": 0.5029,
+          "ci95_coverage": 0.0
+        },
+        "category": {
+          "mean_abs_bias": 0.483,
+          "rmse": 0.6043,
+          "ci95_coverage": 0.044,
+          "ci95_coverage_t_critical": 0.0827,
+          "by_category": {
+            "Dairy": {
+              "mean": -0.4567,
+              "bias": 0.1433,
+              "rmse": 0.148,
+              "ci95_coverage": 0.1133,
+              "mean_se": 0.0496
+            },
+            "Bakery": {
+              "mean": -0.9145,
+              "bias": 0.2855,
+              "rmse": 0.2879,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.0575
+            },
+            "Snacks": {
+              "mean": -0.8907,
+              "bias": 0.9093,
+              "rmse": 0.9104,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.0704
+            },
+            "Soft drinks": {
+              "mean": -1.2697,
+              "bias": 0.9303,
+              "rmse": 0.9323,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.0581
+            },
+            "Household": {
+              "mean": -2.3532,
+              "bias": 0.1468,
+              "rmse": 0.1521,
+              "ci95_coverage": 0.1067,
+              "mean_se": 0.0487
+            }
+          }
+        },
+        "profit_left_on_table": {
+          "mean": 0.0177,
+          "median": 0.0177,
+          "p90": 0.0183,
+          "mean_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.0035
+          }
+        },
+        "flagged_categories_per_estimate": 2.987
+      },
+      "iv_2sls": {
+        "label": "2SLS (cost IV)",
+        "average_elasticity": {
+          "mean": -1.65,
+          "bias": 0.01,
+          "sd": 0.0941,
+          "rmse": 0.0943,
+          "ci95_coverage": 0.9933
+        },
+        "category": {
+          "mean_abs_bias": 0.0163,
+          "rmse": 0.2197,
+          "ci95_coverage": 0.928,
+          "ci95_coverage_t_critical": 0.96,
+          "by_category": {
+            "Dairy": {
+              "mean": -0.6061,
+              "bias": -0.0061,
+              "rmse": 0.1027,
+              "ci95_coverage": 0.94,
+              "mean_se": 0.0991
+            },
+            "Bakery": {
+              "mean": -1.1943,
+              "bias": 0.0057,
+              "rmse": 0.1148,
+              "ci95_coverage": 0.9333,
+              "mean_se": 0.1146
+            },
+            "Snacks": {
+              "mean": -1.8265,
+              "bias": -0.0265,
+              "rmse": 0.2689,
+              "ci95_coverage": 0.94,
+              "mean_se": 0.2579
+            },
+            "Soft drinks": {
+              "mean": -2.1777,
+              "bias": 0.0223,
+              "rmse": 0.3679,
+              "ci95_coverage": 0.9,
+              "mean_se": 0.3226
+            },
+            "Household": {
+              "mean": -2.4791,
+              "bias": 0.0209,
+              "rmse": 0.0993,
+              "ci95_coverage": 0.9267,
+              "mean_se": 0.0988
+            }
+          }
+        },
+        "profit_left_on_table": {
+          "mean": 0.0074,
+          "median": 0.0064,
+          "p90": 0.0152,
+          "mean_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0154,
+            "Soft drinks": 0.0137,
+            "Household": 0.0014
+          }
+        },
+        "flagged_categories_per_estimate": 1.027
+      },
+      "dml_lasso": {
+        "label": "DML (lasso)",
+        "average_elasticity": {
+          "mean": -1.6459,
+          "bias": 0.0141,
+          "sd": 0.0213,
+          "rmse": 0.0255,
+          "ci95_coverage": 1.0
+        },
+        "category": {
+          "mean_abs_bias": 0.0157,
+          "rmse": 0.0445,
+          "ci95_coverage": 0.9067,
+          "ci95_coverage_t_critical": 0.9387,
+          "by_category": {
+            "Dairy": {
+              "mean": -0.5859,
+              "bias": 0.0141,
+              "rmse": 0.0429,
+              "ci95_coverage": 0.9133,
+              "mean_se": 0.0409
+            },
+            "Bakery": {
+              "mean": -1.1818,
+              "bias": 0.0182,
+              "rmse": 0.0463,
+              "ci95_coverage": 0.8733,
+              "mean_se": 0.0403
+            },
+            "Snacks": {
+              "mean": -1.785,
+              "bias": 0.015,
+              "rmse": 0.0421,
+              "ci95_coverage": 0.92,
+              "mean_se": 0.0395
+            },
+            "Soft drinks": {
+              "mean": -2.1753,
+              "bias": 0.0247,
+              "rmse": 0.0489,
+              "ci95_coverage": 0.8667,
+              "mean_se": 0.0397
+            },
+            "Household": {
+              "mean": -2.4935,
+              "bias": 0.0065,
+              "rmse": 0.0418,
+              "ci95_coverage": 0.96,
+              "mean_se": 0.0407
+            }
+          }
+        },
+        "profit_left_on_table": {
+          "mean": 0.0003,
+          "median": 0.0002,
+          "p90": 0.0007,
+          "mean_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0007,
+            "Soft drinks": 0.0005,
+            "Household": 0.0002
+          }
+        },
+        "flagged_categories_per_estimate": 1.0
+      },
+      "dml_boosting": {
+        "label": "DML (boosting)",
+        "average_elasticity": {
+          "mean": -1.653,
+          "bias": 0.007,
+          "sd": 0.0211,
+          "rmse": 0.0222,
+          "ci95_coverage": 1.0
+        },
+        "category": {
+          "mean_abs_bias": 0.0127,
+          "rmse": 0.0453,
+          "ci95_coverage": 0.8933,
+          "ci95_coverage_t_critical": 0.92,
+          "by_category": {
+            "Dairy": {
+              "mean": -0.6068,
+              "bias": -0.0068,
+              "rmse": 0.0407,
+              "ci95_coverage": 0.9067,
+              "mean_se": 0.0387
+            },
+            "Bakery": {
+              "mean": -1.1992,
+              "bias": 0.0008,
+              "rmse": 0.0432,
+              "ci95_coverage": 0.8933,
+              "mean_se": 0.039
+            },
+            "Snacks": {
+              "mean": -1.7849,
+              "bias": 0.0151,
+              "rmse": 0.044,
+              "ci95_coverage": 0.9133,
+              "mean_se": 0.0386
+            },
+            "Soft drinks": {
+              "mean": -2.1697,
+              "bias": 0.0303,
+              "rmse": 0.0521,
+              "ci95_coverage": 0.8467,
+              "mean_se": 0.0384
+            },
+            "Household": {
+              "mean": -2.4893,
+              "bias": 0.0107,
+              "rmse": 0.046,
+              "ci95_coverage": 0.9067,
+              "mean_se": 0.0382
+            }
+          }
+        },
+        "profit_left_on_table": {
+          "mean": 0.0004,
+          "median": 0.0003,
+          "p90": 0.0008,
+          "mean_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0007,
+            "Soft drinks": 0.0005,
+            "Household": 0.0003
+          }
+        },
+        "flagged_categories_per_estimate": 1.0
+      },
+      "iv_first_stage_f_median": 1339.4,
+      "iv_first_stage_f_min": 693.3
+    },
+    "hidden": {
+      "naive_ols": {
+        "label": "Naive OLS",
+        "average_elasticity": {
+          "mean": -0.3507,
+          "bias": 1.3093,
+          "sd": 0.0116,
+          "rmse": 1.3093,
+          "ci95_coverage": 0.0
+        },
+        "category": {
+          "mean_abs_bias": 1.1575,
+          "rmse": 1.2116,
+          "ci95_coverage": 0.2867,
+          "ci95_coverage_t_critical": 0.3867,
+          "by_category": {
+            "Dairy": {
+              "mean": 0.6132,
+              "bias": 1.2132,
+              "rmse": 1.2145,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.2851
+            },
+            "Bakery": {
+              "mean": -0.4857,
+              "bias": 0.7143,
+              "rmse": 0.7181,
+              "ci95_coverage": 0.72,
+              "mean_se": 0.3945
+            },
+            "Snacks": {
+              "mean": -0.2065,
+              "bias": 1.5935,
+              "rmse": 1.5942,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.3547
+            },
+            "Soft drinks": {
+              "mean": -0.7294,
+              "bias": 1.4706,
+              "rmse": 1.4722,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.2836
+            },
+            "Household": {
+              "mean": -1.704,
+              "bias": 0.796,
+              "rmse": 0.7999,
+              "ci95_coverage": 0.7133,
+              "mean_se": 0.434
+            }
+          }
+        },
+        "profit_left_on_table": {
+          "mean": 0.0407,
+          "median": 0.0408,
+          "p90": 0.0408,
+          "mean_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.097
+          }
+        },
+        "flagged_categories_per_estimate": 4.0
+      },
+      "ols_controls": {
+        "label": "OLS + controls",
+        "average_elasticity": {
+          "mean": -0.0331,
+          "bias": 1.6269,
+          "sd": 0.0272,
+          "rmse": 1.6271,
+          "ci95_coverage": 0.0
+        },
+        "category": {
+          "mean_abs_bias": 1.5144,
+          "rmse": 1.5398,
+          "ci95_coverage": 0.0,
+          "ci95_coverage_t_critical": 0.0027,
+          "by_category": {
+            "Dairy": {
+              "mean": 0.919,
+              "bias": 1.519,
+              "rmse": 1.5197,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.2875
+            },
+            "Bakery": {
+              "mean": -0.0643,
+              "bias": 1.1357,
+              "rmse": 1.1379,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.4247
+            },
+            "Snacks": {
+              "mean": -0.0516,
+              "bias": 1.7484,
+              "rmse": 1.7487,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.3559
+            },
+            "Soft drinks": {
+              "mean": -0.3298,
+              "bias": 1.8702,
+              "rmse": 1.871,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.2722
+            },
+            "Household": {
+              "mean": -1.2014,
+              "bias": 1.2986,
+              "rmse": 1.3007,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.4269
+            }
+          }
+        },
+        "profit_left_on_table": {
+          "mean": 0.0408,
+          "median": 0.0408,
+          "p90": 0.0408,
+          "mean_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.0974
+          }
+        },
+        "flagged_categories_per_estimate": 4.013
+      },
+      "twfe": {
+        "label": "Two-way FE",
+        "average_elasticity": {
+          "mean": -0.8494,
+          "bias": 0.8106,
+          "sd": 0.0227,
+          "rmse": 0.8109,
+          "ci95_coverage": 0.0
+        },
+        "category": {
+          "mean_abs_bias": 0.8044,
+          "rmse": 0.8584,
+          "ci95_coverage": 0.0,
+          "ci95_coverage_t_critical": 0.0,
+          "by_category": {
+            "Dairy": {
+              "mean": -0.0743,
+              "bias": 0.5257,
+              "rmse": 0.5269,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.042
+            },
+            "Bakery": {
+              "mean": -0.5593,
+              "bias": 0.6407,
+              "rmse": 0.6416,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.0482
+            },
+            "Snacks": {
+              "mean": -0.6426,
+              "bias": 1.1574,
+              "rmse": 1.1581,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.0594
+            },
+            "Soft drinks": {
+              "mean": -1.0291,
+              "bias": 1.1709,
+              "rmse": 1.1722,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.0511
+            },
+            "Household": {
+              "mean": -1.9726,
+              "bias": 0.5274,
+              "rmse": 0.5287,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.0405
+            }
+          }
+        },
+        "profit_left_on_table": {
+          "mean": 0.0307,
+          "median": 0.0308,
+          "p90": 0.0334,
+          "mean_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.0564
+          }
+        },
+        "flagged_categories_per_estimate": 3.287
+      },
+      "iv_2sls": {
+        "label": "2SLS (cost IV)",
+        "average_elasticity": {
+          "mean": -1.65,
+          "bias": 0.01,
+          "sd": 0.0945,
+          "rmse": 0.0947,
+          "ci95_coverage": 0.9933
+        },
+        "category": {
+          "mean_abs_bias": 0.0162,
+          "rmse": 0.2198,
+          "ci95_coverage": 0.9253,
+          "ci95_coverage_t_critical": 0.9587,
+          "by_category": {
+            "Dairy": {
+              "mean": -0.6073,
+              "bias": -0.0073,
+              "rmse": 0.1033,
+              "ci95_coverage": 0.94,
+              "mean_se": 0.0991
+            },
+            "Bakery": {
+              "mean": -1.1954,
+              "bias": 0.0046,
+              "rmse": 0.1144,
+              "ci95_coverage": 0.9333,
+              "mean_se": 0.1145
+            },
+            "Snacks": {
+              "mean": -1.8272,
+              "bias": -0.0272,
+              "rmse": 0.2693,
+              "ci95_coverage": 0.94,
+              "mean_se": 0.2589
+            },
+            "Soft drinks": {
+              "mean": -2.1781,
+              "bias": 0.0219,
+              "rmse": 0.368,
+              "ci95_coverage": 0.9,
+              "mean_se": 0.3223
+            },
+            "Household": {
+              "mean": -2.4803,
+              "bias": 0.0197,
+              "rmse": 0.099,
+              "ci95_coverage": 0.9133,
+              "mean_se": 0.0986
+            }
+          }
+        },
+        "profit_left_on_table": {
+          "mean": 0.0074,
+          "median": 0.0064,
+          "p90": 0.0153,
+          "mean_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0154,
+            "Soft drinks": 0.0137,
+            "Household": 0.0014
+          }
+        },
+        "flagged_categories_per_estimate": 1.027
+      },
+      "dml_lasso": {
+        "label": "DML (lasso)",
+        "average_elasticity": {
+          "mean": -1.2245,
+          "bias": 0.4355,
+          "sd": 0.0212,
+          "rmse": 0.436,
+          "ci95_coverage": 0.0
+        },
+        "category": {
+          "mean_abs_bias": 0.4371,
+          "rmse": 0.4389,
+          "ci95_coverage": 0.0,
+          "ci95_coverage_t_critical": 0.0,
+          "by_category": {
+            "Dairy": {
+              "mean": -0.1629,
+              "bias": 0.4371,
+              "rmse": 0.4389,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.0383
+            },
+            "Bakery": {
+              "mean": -0.7591,
+              "bias": 0.4409,
+              "rmse": 0.4428,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.0376
+            },
+            "Snacks": {
+              "mean": -1.3631,
+              "bias": 0.4369,
+              "rmse": 0.4384,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.0364
+            },
+            "Soft drinks": {
+              "mean": -1.7558,
+              "bias": 0.4442,
+              "rmse": 0.4459,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.0382
+            },
+            "Household": {
+              "mean": -2.0735,
+              "bias": 0.4265,
+              "rmse": 0.4282,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.0361
+            }
+          }
+        },
+        "profit_left_on_table": {
+          "mean": 0.0252,
+          "median": 0.0252,
+          "p90": 0.0274,
+          "mean_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.0341
+          }
+        },
+        "flagged_categories_per_estimate": 2.0
+      },
+      "dml_boosting": {
+        "label": "DML (boosting)",
+        "average_elasticity": {
+          "mean": -1.2335,
+          "bias": 0.4265,
+          "sd": 0.0212,
+          "rmse": 0.427,
+          "ci95_coverage": 0.0
+        },
+        "category": {
+          "mean_abs_bias": 0.4294,
+          "rmse": 0.4314,
+          "ci95_coverage": 0.0,
+          "ci95_coverage_t_critical": 0.0,
+          "by_category": {
+            "Dairy": {
+              "mean": -0.1867,
+              "bias": 0.4133,
+              "rmse": 0.4153,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.036
+            },
+            "Bakery": {
+              "mean": -0.7762,
+              "bias": 0.4238,
+              "rmse": 0.4258,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.0364
+            },
+            "Snacks": {
+              "mean": -1.3669,
+              "bias": 0.4331,
+              "rmse": 0.4347,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.0357
+            },
+            "Soft drinks": {
+              "mean": -1.7533,
+              "bias": 0.4467,
+              "rmse": 0.4484,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.037
+            },
+            "Household": {
+              "mean": -2.0697,
+              "bias": 0.4303,
+              "rmse": 0.4323,
+              "ci95_coverage": 0.0,
+              "mean_se": 0.034
+            }
+          }
+        },
+        "profit_left_on_table": {
+          "mean": 0.0254,
+          "median": 0.0255,
+          "p90": 0.0279,
+          "mean_by_category": {
+            "Dairy": 0.0,
+            "Bakery": 0.0,
+            "Snacks": 0.0467,
+            "Soft drinks": 0.016,
+            "Household": 0.0349
+          }
+        },
+        "flagged_categories_per_estimate": 2.0
+      },
+      "iv_first_stage_f_median": 1240.6,
+      "iv_first_stage_f_min": 637.4
+    }
+  },
+  "runtime_seconds": {
+    "main": 15.1,
+    "total": 257.3
+  }
+}
